@@ -1,96 +1,245 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="pt-br">
 
 <head>
-	<title> MINHA COLEÇÃO DE CAMISA </title>
-	<style>
-		nav{
-			background-color: #FF0000;
-			font-family: "Segoe UI", sans-serif;
-			border-radius: 23px;
-		}
-		nav ul{
-			list-style:none;
-			margin: 0;
-			padding: 0;
-			display: flex;
-			justify-content: center;
-		}
-		nav ul li {margin: 0;}
-		nav ul li a{
-			display:block;
-			padding: 15px 20px;
-			color: #fff;
-			text-decoration: none;
-			transition: background-color 0.4s;
-		}
-		body{
-			background-color: #FF0000;
-			font-family: "Comic Sans MS", sans;
-			display:flex;
-			align-items: center;
-			flex-direction: column;
-		}
-		.img-container{
-			display: flex;
-			justify-content: center;
-			gap: 20px;
-			margin: 20px;
-			flex-wrap: wrap; 
-		}
-		.img-container a img{
-			width: 200px;
-			height: 200px;
-			border-radius: 53px;
-			transition: 0.4s;
-		}
-		.img-container a img:hover{
-			opacity: 0.8;
-		}
-	</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entendendo a Arpanet</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+header{
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+nav{
+    background-color: #444;
+    text-align: center;
+    padding: 10px;
+}
+
+nav a{
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover{
+    color: yellow;
+}
+
+section{
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+#imagem{
+    text-align: center;
+}
+
+img{
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+footer{
+    text-align: center;
+    padding: 15px;
+    background-color: #222;
+    color: white;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th{
+    background-color: #222;
+    color: white;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+tr:hover{
+    background-color: #ddd;
+}
+</style>
+
 </head>
 
 <body>
 
-	
+<header>
+<h1>ARPANET</h1>
+<p>Vamos entender!</p>
+</header>
 
-	<h1> MINHA COLEÇÃO DE CAMISA DO FLAMENGO</h1>
-	<p>  </p>
+<nav>
+<a href="#sobre">Sobre</a>
+<a href="#projetos">Criadores</a>
+<a href="#comparacao">Comparação</a>
+</nav>
 
-	<div class="img-container">
+<section id="imagem">
+<h3>Imagem da ARPANET</h3>
+<img src="https://hardtec.com.br/wp-content/uploads/2019/12/1afc66d7078e-article-arpanet-infographic-map.png" alt="Mapa da ARPANET">
+</section>
 
-		<!-- Espaço 1 -->
-		<a href="https://loja.flamengo.com.br/manto-flamengo-authentic-jogo-1-adidas-2026/p">
-			<img src="https://flamengo.vtexassets.com/arquivos/ids/187661/image-removebg-preview--38-.png?v=639041177791770000"
-		</a>
+<section id="sobre">
+<h3>O que foi?</h3>
+<p>
+A ARPANET <strong>(Advanced Research Projects Agency Network)</strong> foi a primeira rede de computadores comutada por pacotes, desenvolvida no final dos anos 1960 pelo Departamento de Defesa dos EUA.
+Ela é considerada o embrião da internet.
+</p>
+</section>
 
-		<!-- Espaço 2 -->
-		<a href="https://www.loja.flamengo.com.br/manto-flamengo-jogo-1-adidas-2023/p">
-			<img src="https://flamengo.vtexassets.com/arquivos/ids/166192/HS5184_2_APPAREL_Photography---eCommerce_Front-View_white.jpg?v=638778555623470000"
-		</a>
+<section id="projetos">
+<article>
+<h3>Por que a Arpanet foi criada?</h3>
+<p><mark>Ela surgiu no final da década de 60 durante a Guerra Fria, com dois objetivos principais:</mark></p>
 
-		<!-- Espaço 3 -->
-		<a href="https://www.netshoes.com.br/p/camisa-flamengo-ii-1920-sn-torcedor-adidas-masculina-branco+vermelho-COL-6694-024">
-			<img src="https://static.netshoes.com.br/produtos/camisa-flamengo-ii-1920-sn-torcedor-adidas-masculina/24/COL-6694-024/COL-6694-024_zoom1.jpg?ts=1763723360"
-		</a>
+<ul>
+<li>Compartilhar informações entre universidades e centros de pesquisa</li>
+<li>Criar uma rede resistente a falhas</li>
+</ul>
 
-		<!-- Espaço 4 -->
-		<a href="https://www.mercadolivre.com.br/camisa-retro-flamengo-1995--modelos-exclusivos/up/MLBU3093063726">
-			<img src="https://http2.mlstatic.com/D_NQ_NP_936703-MLB83051796020_032025-O.webp"
-		</a>
+<h4>Quem desenvolveu?</h4>
+<ul>
+<li><strong>Lawrence Roberts</strong></li>
+<li><strong>Leonard Kleinrock</strong></li>
+<li><strong>Joseph C.R. Licklider</strong></li>
+<li><strong>Robert Kahn</strong></li>
+</ul>
 
-		<!-- Espaço 5 -->
-		<a href="https://www.adidas.com.br/camisa-3-cr-flamengo-23-24-infantil/HR3774.html">
-			<img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/73dcb698a4434281aa77ba704f06469b_9366/Camisa_3_CR_Flamengo_23-24_Infantil_Preto_HR3774_01_laydown.jpg"
-		</a>
+<h3>Como Funcionava?</h3>
+<p>
+A Arpanet dividia mensagens em pequenos pacotes de dados enviados por computadores intermediários chamados IMPs.
+</p>
+</article>
+</section>
 
-		<!-- Espaço 6 -->
-		<a href="https://www.lojadssports.com.br/products/camisa-flamengo-i-1995-retro-vermelha-e-preta-masculina?srsltid=AfmBOopoH69G1wfqnp52qHE0OWR09X4kTdOLhTO73fleEeFu5MUn6YsW">
-			<img src="https://www.lojadssports.com.br/cdn/shop/files/18a54e1c.jpg?v=1753581073"
-		</a>
+<section id="comparacao">
+<h3>Comparação: ARPANET vs Internet Atual</h3>
 
-	</div>
+<table>
+<tr>
+<th>Aspecto</th>
+<th>ARPANET</th>
+<th>Internet Atual</th>
+</tr>
+
+<tr>
+<td>📅 Período</td>
+<td>Criada em 1969</td>
+<td>Popularizada a partir dos anos 1990 até hoje</td>
+</tr>
+
+<tr>
+<td>🎯 Objetivo</td>
+<td>Pesquisa e comunicação militar</td>
+<td>Comunicação global, comércio, entretenimento, educação</td>
+</tr>
+
+<tr>
+<td>👥 Usuários</td>
+<td>Cientistas, universidades e militares</td>
+<td>Bilhões de pessoas no mundo inteiro</td>
+</tr>
+
+<tr>
+<td>🌍 Alcance</td>
+<td>Principalmente Estados Unidos</td>
+<td>Mundial</td>
+</tr>
+
+<tr>
+<td>🖥️ Quantidade de computadores</td>
+<td>Apenas 4 no início</td>
+<td>Bilhões de dispositivos conectados</td>
+</tr>
+
+<tr>
+<td>🔌 Tipo de conexão</td>
+<td>Linhas dedicadas e caras</td>
+<td>Fibra óptica, Wi-Fi, 5G, satélites</td>
+</tr>
+
+<tr>
+<td>📦 Tecnologia principal</td>
+<td>Comutação de pacotes</td>
+<td>Comutação de pacotes + redes de alta velocidade</td>
+</tr>
+
+<tr>
+<td>🧠 Controle</td>
+<td>Financiada pelo governo dos EUA</td>
+<td>Estrutura descentralizada global</td>
+</tr>
+
+<tr>
+<td>💬 Serviços</td>
+<td>Transferência de arquivos e acesso remoto</td>
+<td>Redes sociais, streaming, e-commerce, nuvem, IA</td>
+</tr>
+
+<tr>
+<td>📧 E-mail</td>
+<td>Surgiu dentro da ARPANET</td>
+<td>Serviço comum e global</td>
+</tr>
+
+</table>
+</section>
+
+<section id="quiz">
+<h3>Quiz: Teste seus conhecimentos sobre a ARPANET</h3>
+
+<form>
+
+<p><strong>1) Em que ano a ARPANET foi criada?</strong></p>
+<input type="radio" name="pergunta1" value="1965"> 1965<br>
+<input type="radio" name="pergunta1" value="1969"> 1969<br>
+<input type="radio" name="pergunta1" value="1972"> 1972<br><br>
+
+<p><strong>2) Qual era o principal objetivo da ARPANET?</strong></p>
+<input type="radio" name="pergunta2" value="entretenimento"> Entretenimento<br>
+<input type="radio" name="pergunta2" value="militar"> Pesquisa e comunicação militar<br>
+<input type="radio" name="pergunta2" value="redes_sociais"> Criar redes sociais<br><br>
+
+<p><strong>3) Qual tecnologia foi a base de funcionamento da ARPANET?</strong></p>
+<input type="radio" name="pergunta3" value="fibra"> Fibra óptica<br>
+<input type="radio" name="pergunta3" value="pacotes"> Comutação de pacotes<br>
+<input type="radio" name="pergunta3" value="wifi"> Wi-Fi<br><br>
+
+<button type="submit">Enviar Respostas</button>
+
+</form>
+</section>
+
+<footer>
+<p>Site educativo sobre a ARPANET - 2026</p>
+</footer>
 
 </body>
-
 </html>
