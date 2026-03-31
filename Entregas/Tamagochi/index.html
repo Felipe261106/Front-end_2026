@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Tamagotchi 🌸</title>
+
+  <!-- DaisyUI + Tailwind -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+
+    body {
+      background-image: url('bg_d.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    /* Overlay suave para legibilidade */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 240, 250, 0.25);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Animação idle da criatura */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px);  }
+      50%       { transform: translateY(-10px); }
+    }
+    #mainImage { animation: float 3s ease-in-out infinite; }
+
+    /* Criatura morta para de flutuar */
+    #mainImage.morta { animation: none; }
+
+    /* Toast */
+    #toast {
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col relative">
+
+  <!-- ── HEADER ──────────────────────────────────────────── -->
+  <div class="relative z-10 w-full flex items-center justify-between p-4 gap-4
+              bg-white/40 backdrop-blur-sm shadow-sm">
+
+    <!-- Avatar + nome -->
+    <div class="flex items-center gap-3">
+      <div class="avatar">
+        <div class="w-14 rounded-full ring ring-pink-400 ring-offset-2 ring-offset-white/0">
+          <img id="avatarImg" src="b_n.png" alt="Minha criatura" />
+        </div>
+      </div>
+
+      <input
+        id="nomeInput"
+        type="text"
+        placeholder="Nome da criatura..."
+        class="input input-sm input-bordered border-pink-300 bg-white/70
+               focus:border-pink-500 focus:outline-none rounded-full w-40"
+      />
+    </div>
+
+    <!-- Status -->
+    <span id="status"
+          class="text-sm font-bold text-pink-600 bg-white/70 px-3 py-1 rounded-full shadow-sm">
+      😊 Feliz
+    </span>
+  </div>
+
+  <!-- ── ÁREA PRINCIPAL ──────────────────────────────────── -->
+  <div class="relative z-10 flex flex-col items-center justify-center flex-1 px-4 gap-6">
+
+    <!-- Criatura -->
+    <img
+      id="mainImage"
+      src="b_n.png"
+      alt="Criatura"
+      class="w-56 max-w-xs h-auto drop-shadow-xl cursor-pointer select-none"
+    />
+
+    <!-- Barra de fome -->
+    <div class="w-56 max-w-xs">
+      <div class="flex justify-between text-xs font-bold text-white/90 mb-1 drop-shadow">
+        <span>🍓 Fome</span>
+        <span id="labelBarra">Satisfeita</span>
+      </div>
+      <div class="w-full h-3 rounded-full bg-white/40 overflow-hidden shadow-inner">
+        <div id="barraFome"
+             class="h-full rounded-full transition-all duration-500"
+             style="width: 0%; background: #86efac;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de comida -->
+    <div class="mt-2">
+      <img
+        id="btnImage"
+        src="btn.png"
+        alt="Alimentar"
+        class="w-24 h-auto cursor-pointer select-none
+               active:scale-90 transition-transform duration-150 drop-shadow-lg"
+        onclick="alimentar()"
+        title="Clique para alimentar!"
+      />
+    </div>
+
+  </div>
+
+  <!-- ── TOAST ───────────────────────────────────────────── -->
+  <div id="toast"
+       class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 opacity-0
+              bg-pink-500 text-white text-sm font-bold px-5 py-2 rounded-full shadow-lg">
+  </div>
+
+  <!-- JS -->
+  <script src="tamagotchi.js"></script>
+
+  <!-- Atualiza label da barra conforme estado -->
+  <script>
+    const labelBarra = document.getElementById("labelBarra");
+    const _origTick  = tick;
+
+    // Observa mudanças na barra para atualizar o label
+    const observer = new MutationObserver(() => {
+      const pct = parseFloat(barraFome.style.width) || 0;
+      if (pct === 0)        labelBarra.textContent = "Satisfeita";
+      else if (pct < 50)    labelBarra.textContent = "Boa";
+      else if (pct < 80)    labelBarra.textContent = "Com fome...";
+      else                  labelBarra.textContent = "🚨 Urgente!";
+    });
+    observer.observe(document.getElementById("barraFome"), { attributes: true, attributeFilter: ["style"] });
+  </script>
+
+</body>
+</html>
