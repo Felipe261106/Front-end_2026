@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copa do Mundo — Grupos & Fatos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0e1a;
+      --surface:  #111827;
+      --border:   #1f2d47;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --gold:     #f5c542;
+      --a:        #ef4444;
+      --b:        #3b82f6;
+      --c:        #22c55e;
+      --d:        #f97316;
+      --e:        #a855f7;
+      --f:        #06b6d4;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      border-bottom: 3px solid var(--gold);
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(245,197,66,.12) 0%, transparent 70%);
+    }
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      letter-spacing: .08em;
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(245,197,66,.4);
+      position: relative;
+    }
+    header p {
+      margin-top: .6rem;
+      color: var(--muted);
+      font-size: 1rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    /* ── NAV BAR (label + botão) ── */
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 2rem 1.5rem 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    #btn-proximo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: .12em;
+      padding: .7rem 2.4rem;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .15s;
+    }
+    #btn-proximo:hover  { background: var(--gold); color: #0a0e1a; transform: scale(1.04); }
+    #btn-proximo:active { transform: scale(.97); }
+
+    #pagina-label {
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    /* ── GROUP CARD ── */
+    .grupo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,.4);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .grupo:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0,0,0,.55);
+    }
+
+    /* faixa superior — definida inline pelo JS */
+    #grupo-a { border-top: 4px solid var(--a); }
+    #grupo-b { border-top: 4px solid var(--b); }
+    #grupo-c { border-top: 4px solid var(--c); }
+
+    /* ── GROUP HEADER ── */
+    .grupo-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.6rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .grupo-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    /* badges iniciais */
+    #grupo-a .grupo-badge { background: rgba(239,68,68,.15);  color: var(--a); border: 2px solid var(--a); }
+    #grupo-b .grupo-badge { background: rgba(59,130,246,.15); color: var(--b); border: 2px solid var(--b); }
+    #grupo-c .grupo-badge { background: rgba(34,197,94,.15);  color: var(--c); border: 2px solid var(--c); }
+
+    .grupo-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: .06em;
+    }
+
+    /* ── BODY ── */
+    .grupo-body { padding: 1.8rem 2rem; }
+
+    .grupo-body h3 {
+      font-size: .7rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* ── LIST ── */
+    .grupo-body ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: .7rem;
+      margin-bottom: 1.8rem;
+    }
+    .grupo-body li {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .65rem 1rem;
+      font-weight: 600;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: background .2s;
+    }
+    .grupo-body li:hover { background: rgba(255,255,255,.08); }
+    .grupo-body li::before { content: '⚽'; font-size: .75rem; opacity: .6; }
+
+    /* ── DETAILS ── */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    summary {
+      cursor: pointer;
+      padding: .9rem 1.2rem;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      user-select: none;
+      list-style: none;
+      background: rgba(255,255,255,.03);
+      transition: background .2s;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: rgba(255,255,255,.07); }
+    summary::before { content: '▶'; font-size: .65rem; transition: transform .25s; }
+    details[open] summary::before { transform: rotate(90deg); }
+
+    /* cor inicial dos summaries */
+    #grupo-a summary { color: var(--a); }
+    #grupo-b summary { color: var(--b); }
+    #grupo-c summary { color: var(--c); }
+
+    .details-content {
+      padding: 1.1rem 1.4rem;
+      font-size: .93rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,.2);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ANIMAÇÃO de entrada ao alternar ── */
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .grupo.animando { animation: fadeSlide .4s ease both; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Copa do Mundo</h1>
+    <p>Grupos &amp; Fatos — Edição Especial</p>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       BARRA DE NAVEGAÇÃO — BOTÃO "PRÓXIMO"
+  ══════════════════════════════════════════ -->
+  <div class="nav-bar">
+    <span id="pagina-label">Página 1 de 2 — Grupos A, B e C</span>
+    <button id="btn-proximo" onclick="alternarGrupos()">Próximo ▶</button>
+  </div>
+
+  <main>
+
+    <!-- ══════════════════════════════════
+         ITEM 1 — GRUPO A
+    ══════════════════════════════════════ -->
+    <div id="grupo-a" class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-badge">A</div>
+        <div>
+          <h2>Grupo A</h2>
+          <p style="color:var(--muted);font-size:.85rem;">4 seleções</p>
+        </div>
+      </div>
+      <div class="grupo-body">
+        <h3>Seleções classificadas</h3>
+        <ul>
+          <li>🇲🇽 México</li>
+          <li>🇿🇦 África do Sul</li>
+          <li>🇰🇷 Coreia do Sul</li>
+          <li>🇨🇿 República Tcheca</li>
+        </ul>
+        <details>
+          <summary>🔍 Saiba Mais — Fatos do Grupo A</summary>
+          <div class="details-content">
+            O jogo de abertura será <strong>México × África do Sul</strong>, dois países com ampla base de torcedores e tradição nas Copas. Confrontos entre <strong>Coreia do Sul</strong> e seleções europeias já ocorreram em várias edições do torneio, com histórico equilibrado que promete emoção neste grupo.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         ITEM 2 — GRUPO B
+    ══════════════════════════════════════ -->
+    <div id="grupo-b" class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-badge">B</div>
+        <div>
+          <h2>Grupo B</h2>
+          <p style="color:var(--muted);font-size:.85rem;">4 seleções</p>
+        </div>
+      </div>
+      <div class="grupo-body">
+        <h3>Seleções classificadas</h3>
+        <ul>
+          <li>🇨🇦 Canadá</li>
+          <li>🇨🇭 Suíça</li>
+          <li>🇶🇦 Catar</li>
+          <li>🇧🇦 Vaga Europeia (Bósnia)</li>
+        </ul>
+        <details>
+          <summary>🔍 Saiba Mais — Fatos do Grupo B</summary>
+          <div class="details-content">
+            O <strong>Canadá</strong> joga em casa, o que historicamente é um fator decisivo de desempenho — o apoio da torcida e a familiaridade com o ambiente podem ser diferenciais. Já <strong>Catar e Suíça</strong> se enfrentaram recentemente em amistosos internacionais, tornando este confronto ainda mais esperado pelos analistas esportivos.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         ITEM 3 — GRUPO C
+    ══════════════════════════════════════ -->
+    <div id="grupo-c" class="grupo">
+      <div class="grupo-header">
+        <div class="grupo-badge">C</div>
+        <div>
+          <h2>Grupo C</h2>
+          <p style="color:var(--muted);font-size:.85rem;">4 seleções</p>
+        </div>
+      </div>
+      <div class="grupo-body">
+        <h3>Seleções classificadas</h3>
+        <ul>
+          <li>🇧🇷 Brasil</li>
+          <li>🇲🇦 Marrocos</li>
+          <li>🇭🇹 Haiti</li>
+          <li>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia</li>
+        </ul>
+        <details>
+          <summary>🔍 Saiba Mais — Fatos do Grupo C</summary>
+          <div class="details-content">
+            <strong>Brasil, Marrocos e Escócia</strong> já dividiram o mesmo grupo na Copa de <strong>1998</strong>, tornando este reencontro um capítulo especial da história do torneio. Curiosidade histórica: o <strong>Brasil nunca perdeu para a Escócia</strong> em partidas de Copa do Mundo — um retrospecto que ambas as equipes certamente têm em mente.
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Copa do Mundo &mdash; Grupos &amp; Fatos &copy; 2025</p>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════════════════════
+       JAVASCRIPT — função alternarGrupos() chamada pelo onclick
+  ════════════════════════════════════════════════════════════════ -->
+  <script>
+
+    // ── Objeto com os dados das duas páginas ─────────────────────────────
+    var paginas = [
+
+      // PÁGINA 1 — Grupos A, B, C (estado inicial)
+      {
+        label: "Página 1 de 2 — Grupos A, B e C",
+        botao: "Próximo ▶",
+        grupos: [
+          {
+            id: "grupo-a",
+            cor: "#ef4444",
+            corRgb: "239,68,68",
+            letra: "A",
+            titulo: "Grupo A",
+            selecoes: ["🇲🇽 México", "🇿🇦 África do Sul", "🇰🇷 Coreia do Sul", "🇨🇿 República Tcheca"],
+            fatos: "O jogo de abertura será <strong>México × África do Sul</strong>, dois países com ampla base de torcedores e tradição nas Copas. Confrontos entre <strong>Coreia do Sul</strong> e seleções europeias já ocorreram em várias edições do torneio, com histórico equilibrado que promete emoção neste grupo."
+          },
+          {
+            id: "grupo-b",
+            cor: "#3b82f6",
+            corRgb: "59,130,246",
+            letra: "B",
+            titulo: "Grupo B",
+            selecoes: ["🇨🇦 Canadá", "🇨🇭 Suíça", "🇶🇦 Catar", "🇧🇦 Vaga Europeia (Bósnia)"],
+            fatos: "O <strong>Canadá</strong> joga em casa, o que historicamente é um fator decisivo de desempenho — o apoio da torcida e a familiaridade com o ambiente podem ser diferenciais. Já <strong>Catar e Suíça</strong> se enfrentaram recentemente em amistosos internacionais, tornando este confronto ainda mais esperado pelos analistas esportivos."
+          },
+          {
+            id: "grupo-c",
+            cor: "#22c55e",
+            corRgb: "34,197,94",
+            letra: "C",
+            titulo: "Grupo C",
+            selecoes: ["🇧🇷 Brasil", "🇲🇦 Marrocos", "🇭🇹 Haiti", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],
+            fatos: "<strong>Brasil, Marrocos e Escócia</strong> já dividiram o mesmo grupo na Copa de <strong>1998</strong>, tornando este reencontro um capítulo especial da história do torneio. Curiosidade histórica: o <strong>Brasil nunca perdeu para a Escócia</strong> em partidas de Copa do Mundo — um retrospecto que ambas as equipes certamente têm em mente."
+          }
+        ]
+      },
+
+      // PÁGINA 2 — Grupos D, E, F
+      {
+        label: "Página 2 de 2 — Grupos D, E e F",
+        botao: "◀ Anterior",
+        grupos: [
+          {
+            id: "grupo-a",
+            cor: "#f97316",
+            corRgb: "249,115,22",
+            letra: "D",
+            titulo: "Grupo D",
+            selecoes: ["🇺🇸 Estados Unidos", "🇵🇾 Paraguai", "🇦🇺 Austrália", "🇹🇷 Turquia"],
+            fatos: "Os <strong>Estados Unidos</strong> jogam em casa, vantagem histórica comprovada em torneios internacionais — a pressão da torcida e o fator campo podem ser determinantes. A <strong>Austrália</strong> enfrenta frequentemente seleções sul-americanas em torneios, acumulando experiência importante contra adversários como o Paraguai."
+          },
+          {
+            id: "grupo-b",
+            cor: "#a855f7",
+            corRgb: "168,85,247",
+            letra: "E",
+            titulo: "Grupo E",
+            selecoes: ["🇩🇪 Alemanha", "🇪🇨 Equador", "🇨🇮 Costa do Marfim", "🇨🇼 Curaçao"],
+            fatos: "A <strong>Alemanha</strong> costuma dominar fases de grupos com regularidade e eficiência, sendo uma das favoritas ao título. <strong>Equador e Costa do Marfim</strong> apresentam estilos físicos semelhantes — com atletismo e bolas longas —, o que promete um duelo intenso e disputado entre as duas seleções."
+          },
+          {
+            id: "grupo-c",
+            cor: "#06b6d4",
+            corRgb: "6,182,212",
+            letra: "F",
+            titulo: "Grupo F",
+            selecoes: ["🇳🇱 Holanda", "🇯🇵 Japão", "🇹🇳 Tunísia", "🇸🇪 Suécia"],
+            fatos: "A <strong>Holanda</strong> volta às grandes competições com uma geração talentosa, buscando reafirmar seu futebol ofensivo. O <strong>Japão</strong> surpreende cada vez mais com organização tática e disciplina coletiva, enquanto <strong>Tunísia e Suécia</strong> completam um grupo equilibrado com estilos bem contrastantes."
+          }
+        ]
+      }
+
+    ]; // fim do array paginas
+
+    // ── Variável de controle da página atual ─────────────────────────────
+    var paginaAtual = 0;
+
+    // ── Função chamada pelo evento onclick do botão "Próximo" ─────────────
+    function alternarGrupos() {
+
+      // Alterna entre 0 (grupos A-C) e 1 (grupos D-F)
+      paginaAtual = (paginaAtual === 0) ? 1 : 0;
+
+      var pagina = paginas[paginaAtual];
+
+      // Atualiza o label de página e o texto do botão
+      document.getElementById("pagina-label").textContent = pagina.label;
+      document.getElementById("btn-proximo").textContent  = pagina.botao;
+
+      // Percorre os três grupos e atualiza cada card
+      for (var i = 0; i < pagina.grupos.length; i++) {
+
+        var g    = pagina.grupos[i];
+        var card = document.getElementById(g.id);
+
+        // 1. Aplica animação de entrada
+        card.classList.remove("animando");
+        void card.offsetWidth;                  // reflow para reiniciar a animação
+        card.classList.add("animando");
+
+        // 2. Cor da faixa superior do card
+        card.style.borderTopColor = g.cor;
+
+        // 3. Badge: letra, cor de fundo, borda e texto
+        var badge            = card.querySelector(".grupo-badge");
+        badge.textContent    = g.letra;
+        badge.style.color       = g.cor;
+        badge.style.borderColor = g.cor;
+        badge.style.background  = "rgba(" + g.corRgb + ", .15)";
+
+        // 4. Título (h2) do grupo
+        card.querySelector(".grupo-header h2").textContent = g.titulo;
+
+        // 5. Lista de seleções — reconstrói os <li> dinamicamente
+        var ul      = card.querySelector(".grupo-body ul");
+        ul.innerHTML = "";
+        for (var j = 0; j < g.selecoes.length; j++) {
+          var li       = document.createElement("li");
+          li.textContent = g.selecoes[j];
+          ul.appendChild(li);
+        }
+
+        // 6. Cor e texto do <summary> dentro de <details>
+        var summary        = card.querySelector("summary");
+        summary.style.color = g.cor;
+        summary.textContent = "🔍 Saiba Mais — Fatos do " + g.titulo;
+
+        // 7. Conteúdo dos fatos dentro de <details>
+        card.querySelector(".details-content").innerHTML = g.fatos;
+
+        // 8. Fecha o <details> ao trocar de página
+        card.querySelector("details").removeAttribute("open");
+
+      } // fim do for
+
+    } // fim da função alternarGrupos
+
+  </script>
+
+</body>
+</html>
