@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisador de Cartão</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f3f4f6;
+    font-family: Arial, sans-serif;
+}
+
+.card{
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+.grupo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+label{
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input{
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover{
+    background: #374151;
+}
+
+#resultado{
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    display: none;
+    line-height: 1.8;
+}
+
+.valido{
+    border-left: 5px solid #22c55e;
+}
+
+.invalido{
+    border-left: 5px solid #ef4444;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Analisador de Cartão</h1>
+
+    <div class="grupo">
+
+        <label>Número do Cartão</label>
+
+        <input 
+            type="text" 
+            id="cartao" 
+            placeholder="Digite o número do cartão"
+            maxlength="19"
+        >
+
+    </div>
+
+    <button id="analisar">
+        Analisar Cartão
+    </button>
+
+    <div id="resultado"></div>
+
+</div>
+
+<script src="ValidadorSeguranca(JS).js"></script>
+
+</body>
+</html>
