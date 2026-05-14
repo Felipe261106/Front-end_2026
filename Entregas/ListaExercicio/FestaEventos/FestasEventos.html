@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinity Bank Festas e Eventos</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    padding: 40px;
+    color: #111827;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+p{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4b5563;
+}
+
+h2{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.grupo{
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select,
+input{
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button{
+    display: block;
+    width: 400px;
+    margin: 20px auto;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background: #374151;
+}
+
+#resultado{
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: none;
+    line-height: 1.7;
+}
+
+</style> 
+</head>
+
+<body>
+<h1>Infinity Bank Festas e Eventos</h1>
+<p>Bem-vindo ao Infinity Bank Festas e Eventos! Somos especializados em organizar eventos</p>
+<h2>Serviços Oferecidos</h2>
+
+
+<div class= "grupo">
+    <label>Escolha um pacote:</label>
+
+<select id="pacote">
+    <option value="">Selecione um pacote</option>
+  <option value="Standard">Standard - R$50.00 por pessoa</option>
+  <option value="Premium">Premium - R$80.00 por pessoa</option>
+  <option value="Infinity Deluxe">Infinity Deluxe - R$180.00 por pessoa</option>
+</select>
+</div>
+  
+<div class= "grupo">
+     <label>Quantidade de Pessoas:</label>  
+<input type="number" id="pessoas" placeholder="Digite a quantidade de pessoas">
+</div>
+
+<button id="calcular">
+    Calcular orçamento
+</button>
+
+<div id="resultado"></div>
+<script src="Festa(JS).js"></script>  
+</body>
+</html>
