@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestão de convidados VIP</title>
+        
+        <style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f3f4f6;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.lista{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button{
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #111827;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #374151;
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.riscado{
+    text-decoration: line-through;
+    color: gray;
+}
+
+</style>
+    </head>
+    <body>
+        <h1> Gestão de convidados VIP</h1>
+    <div class= "lista">
+   
+        <input type="text" id="nome" placeholder="Digite o nome do convidado">
+
+    <button id="adicionar">Adicionar convidado</button>
+    </div>
+
+    <ul id="lista"></ul>"
+</div>
+<script src="ListaVip(JS).js"></script>
+    </body>
+</html>
