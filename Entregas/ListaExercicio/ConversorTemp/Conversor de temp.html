@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Temperatura</title>
+
+  <style>
+    body{
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .card{
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h1{
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .grupo{
+      margin-bottom: 20px;
+    }
+
+    label{
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input{
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input:focus{
+      outline: none;
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Conversor</h1>
+
+    <div class="grupo">
+      <label for="celsius">Celsius (°C)</label>
+      <input type="number" id="celsius" step="0.1" placeholder="Digite em Celsius">
+    </div>
+
+    <div class="grupo">
+      <label for="fahrenheit">Fahrenheit (°F)</label>
+      <input type="number" id="fahrenheit" step="0.1" placeholder="Digite em Fahrenheit">
+    </div>
+  </div>
+
+  <script src="Conversor(JS).js"></script>
+
+</body>
+</html> 
